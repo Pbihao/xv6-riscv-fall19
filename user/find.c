@@ -73,10 +73,10 @@ int main(int argc, char *argv[])
 {
     if(argc < 2){
         printf("at least input two argvs\n");
-        exit();
+        exit(0);
     }
     find(argv[1], argv[2]);
-    exit();
+    exit(0);
 }
 
 

@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     
     if (argc < 2){
         printf("Error input!\n");
-        exit();
+        exit(0);
     }
     while(read(0, &c, 1) > 0){
         if(c != '\n'){
@@ -28,12 +28,12 @@ int main(int argc, char *argv[])
         argv[argc + 1] = 0;
         if(fork()==0){
             exec(argv[1], argv + 1);
-            exit();
+            exit(0);
         }else{
-            wait();
+            wait(0);
         }
         buf[i] = '\0';
     }
-    exit();
+    exit(0);
     return 0;
 }

@@ -252,6 +252,7 @@ fork(void)
 
   // Allocate process.
   if((np = allocproc()) == 0){
+    printf("debug: failt request memory\n");
     return -1;
   }
 

@@ -11,16 +11,16 @@ int main(int argc, char const *argv[])
     char buff[4];
     if(pipe(fd1) != 0){
         printf("pipe() failed\n");
-        exit();
+        exit(0);
     }
     if(pipe(fd2) != 0){
         printf("pipe() failed\n");
-        exit();
+        exit(0);
     }
     if(fork() > 0){
         if(write(fd1[1], "ping", 4) != 4){
             printf("write failed");
-            exit();
+            exit(0);
         }
         close(fd1[1]);
         if(read(fd2[0], buff, 4) == 4){
@@ -33,10 +33,10 @@ int main(int argc, char const *argv[])
             printf("%d: received %s\n", getpid(), buff);
             if(write(fd2[1], "pong", 4) != 4){
                 printf("write failed");
-                exit();
+                exit(0);
             }
             close(fd2[1]);
         }
     }
-    exit();
+    exit(0);
 }
