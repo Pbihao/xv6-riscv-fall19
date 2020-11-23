@@ -66,6 +66,7 @@ readfile(char *name, char *data, int max)
     return;
   }
   data[n] = '\0';
+  //printf("%s", data);
 }
 
 // look for the small string in the big string;
@@ -142,6 +143,9 @@ one(char *cmd, char *expect, int tight)
   readfile(outfile, out, sizeof(out));
   unlink(outfile);
 
+ // fprintf(2, "\n******************\n");
+ // fprintf(2, "len:%d\n", strlen(out));
+ // fprintf(2, "%s", out);
   if(strstr(out, expect) != 0){
     if(tight && strlen(out) > strlen(expect) + 10){
       fprintf(2, "testsh: saw expected output, but too much else as well\n");
@@ -310,12 +314,14 @@ t8(int *ok)
   printf("pipe and redirects: ");
   
   if(one("grep suggestions < README | wc > testsh.out\n", "", 1) == 0){
+    
     printf("FAIL\n");
     *ok = 0;
   } else {
-    char buf[64];
+    char buf[124];
     readfile("testsh.out", buf, sizeof(buf));
     if(strstr(buf, "1 11 71") == 0){
+
       printf("FAIL\n");
       *ok = 0;
     } else {
